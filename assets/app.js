@@ -1,27 +1,104 @@
-$(document).ready(function() {
-	var questions = [{
-		text: 'What color is the sky?'
-		choices: 
-			{text = 'blue',
-			correct = true
-			},      
-			{text = 'red',
-			correct = false
-			},
-			{text = 'green',
-			correct = false
-			},      
-			{text = 'yellow',
-			correct = false
-			}
+var questions = [{
+	'title': 'Cats brains are most similar to that of a/an...',
+	'options': ['dog', 'human', 'lion', 'catfish'],
+	'correct': 'human'
+}, {
+	'title': 'The first cat in space was...',
+	'options': ['American', 'British', 'French', 'Japanese'],
+	'correct': 'French'
+}, {
+	'title': 'A cat can jump as high as...',
+	'options': ['twice its height', 'three times its height', 'four times its height', 'five times its height'],
+	'correct': 'five times its height'
+}, {
+	'title': 'Isaac Newton had a cat named ...',
+	'options': ['Gravity', 'Bucket', 'Spithead', 'Curly'],
+	'correct': 'Spithead'
+}, {
+	'title': 'The oldest cat on record lived ....',
+	'options': ['a', 'b', 'c', 'd'],
+	'correct': 'b'
+}, {
+	'title': 'The oldest cat on record lived ...',
+	'options': ['48 years', '38 years', '43 years', '27 years'],
+	'correct': '38 years'
+}];
 
+var currentQuestion;
+var questionIndex;
+var numCorrect = 0;
+var numWrong = 0;
+var score = numCorrect/questions.length * 100;
+
+$(document).ready(function() {
+	$("#gameScreen").hide();
+	$("#start").on("click",function(){
+		startGame();
+	});
+
+	$(".option-btn").on('click', function() {
+		var id = $(this).attr('id');
+		var ans = $("#"+id).text();
+		var correct = checkAnswer(ans);
+		var text = '';
+
+		if(correct) {
+			numCorrect++;
+			text = 'correct';
 
 		}
+		else {
+			numWrong++;
+			text = 'wrong';
+		}
 
-		]};
-$("#start").on("click",function(){
-	$("#start").hide()
+		alert(text);
+
+		if(questionIndex < questions.length -1) {
+			questionIndex++;
+			currentQuestion = questions[questionIndex];
+			displayQuestion();
+		}
+		else {
+			alert('Done! Your score =' + score + '%' );
+		}
+
+	});
+
 });
+
+
+function startGame() {
+
+	$("#startScreen").hide();
+	$("#gameScreen").show();
+
+	shuffle(questions);
+	questionIndex = 0;
+
+	currentQuestion = questions[0];
+	displayQuestion();
+};
+
+function displayQuestion() {
+
+	$("#questionTitle").text(currentQuestion.title);
+	$("#first").text(currentQuestion.options[0])
+	$("#second").text(currentQuestion.options[1])
+	$("#third").text(currentQuestion.options[2])
+	$("#fourth").text(currentQuestion.options[3]);
+
+};
+
+function checkAnswer(val) {
+	if(currentQuestion.correct == val) {
+		return true;
+	}
+
+	return false;
+}
+
+
 
 	
 	// var questions;
@@ -80,22 +157,22 @@ $("#start").on("click",function(){
 // });
 // });
 
-// // from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-// function shuffle(array) {
-//   var currentIndex = array.length, temporaryValue, randomIndex;
+// from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
-//   // While there remain elements to shuffle...
-//   while (0 !== currentIndex) {
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
 
-//     // Pick a remaining element...
-//     randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex -= 1;
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
 
-//     // And swap it with the current element.
-//     temporaryValue = array[currentIndex];
-//     array[currentIndex] = array[randomIndex];
-//     array[randomIndex] = temporaryValue;
-//   }
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-//   return array;
-// };
+  return array;
+};
