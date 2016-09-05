@@ -17,7 +17,7 @@ var questions = [{
 }, {
 	'title': 'Cats spend 2/3rds of their life....',
 	'options': ['Cleaning themselves', 'sleeping', 'hunting', 'purring'],
-	'correct': 'b'
+	'correct': 'sleeping'
 }, {
 	'title': 'The oldest cat on record lived ...',
 	'options': ['48 years', '38 years', '43 years', '27 years'],
