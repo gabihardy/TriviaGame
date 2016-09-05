@@ -15,8 +15,8 @@ var questions = [{
 	'options': ['Gravity', 'Bucket', 'Spithead', 'Curly'],
 	'correct': 'Spithead'
 }, {
-	'title': 'The oldest cat on record lived ....',
-	'options': ['a', 'b', 'c', 'd'],
+	'title': 'Cats spend 2/3rds of their life....',
+	'options': ['Cleaning themselves', 'sleeping', 'hunting', 'purring'],
 	'correct': 'b'
 }, {
 	'title': 'The oldest cat on record lived ...',
